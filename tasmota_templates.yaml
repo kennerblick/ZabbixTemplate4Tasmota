@@ -1,0 +1,526 @@
+zabbix_export:
+  version: '5.4'
+  date: '2022-01-04T14:51:24Z'
+  groups:
+    -
+      uuid: 7df96b18c230490a9a0a9e2307226338
+      name: Templates
+  templates:
+    -
+      uuid: 316b96a5bd42477a85efc819139ae354
+      template: Tasmota
+      name: Tasmota
+      groups:
+        -
+          name: Templates
+      items:
+        -
+          uuid: fbbb8b2b3f774b91bb4810d3453a02c3
+          name: FWR_Hardware
+          type: DEPENDENT
+          key: FWR_Hardware
+          delay: '0'
+          trends: '0'
+          value_type: TEXT
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.StatusFWR.Hardware
+          master_item:
+            key: StatusFRM
+        -
+          uuid: 6d9d5c658e5d4f85850fc0c40e4f396d
+          name: FWR_Version
+          type: DEPENDENT
+          key: FWR_Version
+          delay: '0'
+          trends: '0'
+          value_type: TEXT
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.StatusFWR.Version
+          master_item:
+            key: StatusFRM
+        -
+          uuid: f91d5bd8109b437cb3c220a4a7adbb44
+          name: MQT.Mqtt.Host
+          type: DEPENDENT
+          key: Mqtt.Host
+          delay: '0'
+          trends: '0'
+          value_type: TEXT
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.StatusMQT.MqttHost
+          master_item:
+            key: StatusMQT
+        -
+          uuid: 9d36c3c4281e46b5a20a837ba9d618b5
+          name: MQT.MqttClient
+          type: DEPENDENT
+          key: MqttClient
+          delay: '0'
+          trends: '0'
+          value_type: TEXT
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.StatusMQT.MqttClient
+          master_item:
+            key: StatusMQT
+        -
+          uuid: cf705d39380a4bf7b651f6e93bbb3774
+          name: MQT.MqttUser
+          type: DEPENDENT
+          key: MqttUser
+          delay: '0'
+          trends: '0'
+          value_type: TEXT
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.StatusMQT.MqttUser
+          master_item:
+            key: StatusMQT
+        -
+          uuid: cb2bb53b11164f44a7207f3d6837ac6f
+          name: NET.IPAddress
+          type: DEPENDENT
+          key: NET.IPAddress
+          delay: '0'
+          trends: '0'
+          value_type: TEXT
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.StatusNET.IPAddress
+          master_item:
+            key: Status.NET
+        -
+          uuid: 1e3012da29b641cab433926a51017dc6
+          name: NET.Mac
+          type: DEPENDENT
+          key: NET.Mac
+          delay: '0'
+          trends: '0'
+          value_type: TEXT
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.StatusNET.Mac
+          master_item:
+            key: Status.NET
+        -
+          uuid: 14da5e91112743038bb3789b0da3d4cf
+          name: NET.WifiPower
+          type: DEPENDENT
+          key: NET.WifiPower
+          delay: '0'
+          value_type: FLOAT
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.StatusNET.WifiPower
+          master_item:
+            key: Status.NET
+        -
+          uuid: e213bd8d55d64956adb3c0b239533ea1
+          name: NET_Hostname
+          type: DEPENDENT
+          key: NET_Hostname
+          delay: '0'
+          trends: '0'
+          value_type: TEXT
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.StatusNET.Hostname
+          master_item:
+            key: Status.NET
+        -
+          uuid: c5db0789e065470482beec9788712c14
+          name: Status
+          type: HTTP_AGENT
+          key: Status
+          trends: '0'
+          value_type: TEXT
+          url: 'http://{HOST.CONN}/cm?cmnd=Status%2008'
+          posts: '{}'
+          post_type: JSON
+        -
+          uuid: 2ca548b67cf04856b8cf6834ee4f6efb
+          name: Status.NET
+          type: HTTP_AGENT
+          key: Status.NET
+          trends: '0'
+          value_type: TEXT
+          url: 'http://{HOST.CONN}/cm?cmnd=Status%2005'
+          posts: '{}'
+          post_type: JSON
+        -
+          uuid: 717638bca5524938a6ea552e0859e430
+          name: Status.FRM
+          type: HTTP_AGENT
+          key: StatusFRM
+          trends: '0'
+          value_type: TEXT
+          url: 'http://{HOST.CONN}/cm?cmnd=Status%2002'
+          posts: '{}'
+          post_type: JSON
+        -
+          uuid: 3bb0f3bf3eb447d4b6b9ad3ac5a4adf9
+          name: Status.MQT
+          type: HTTP_AGENT
+          key: StatusMQT
+          trends: '0'
+          value_type: TEXT
+          url: 'http://{HOST.CONN}/cm?cmnd=Status%2006'
+          posts: '{}'
+          post_type: JSON
+        -
+          uuid: 2429f9bf8b0d43d68922712f58dfd974
+          name: Status_ButtonRetain
+          type: DEPENDENT
+          key: Status_ButtonRetain
+          delay: '0'
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.Status.ButtonRetain
+          master_item:
+            key: Status
+        -
+          uuid: ad3ed8b07147453d837a43eb59ff68a6
+          name: Status_ButtonTopic
+          type: DEPENDENT
+          key: Status_ButtonTopic
+          delay: '0'
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.Status.ButtonTopic
+          master_item:
+            key: Status
+        -
+          uuid: 0cc6eeb182914324b7f0a9b89b9cafc4
+          name: Status_Devicename
+          type: DEPENDENT
+          key: Status_Devicename
+          delay: '0'
+          trends: '0'
+          value_type: TEXT
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.Status.DeviceName
+          master_item:
+            key: Status
+        -
+          uuid: 72080a8c852049bbbbb20a127137a94b
+          name: Status_FriendlyName
+          type: DEPENDENT
+          key: Status_FriendlyName
+          delay: '0'
+          trends: '0'
+          value_type: TEXT
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.Status.FriendlyName
+          master_item:
+            key: Status
+        -
+          uuid: ac480f52910d42cfbeee042ba392f665
+          name: Status_Power
+          type: DEPENDENT
+          key: Status_Power
+          delay: '0'
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.Status.Power
+          master_item:
+            key: Status
+        -
+          uuid: 0aec79f1eaf441919be52983b4d02f28
+          name: Status_POWER
+          type: DEPENDENT
+          key: Status_POWER
+          delay: '0'
+          trends: '0'
+          value_type: TEXT
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.StatusSTS.POWER
+          master_item:
+            key: Status
+        -
+          uuid: a97d67f283d64fedb14b208502177a18
+          name: Status_POWER1
+          type: DEPENDENT
+          key: Status_POWER1
+          delay: '0'
+          trends: '0'
+          value_type: TEXT
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.StatusSTS.POWER1
+          master_item:
+            key: Status
+        -
+          uuid: c9f21503723d4ec1916a20b819e35c32
+          name: Status_POWER2
+          type: DEPENDENT
+          key: Status_POWER2
+          delay: '0'
+          trends: '0'
+          value_type: TEXT
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.StatusSTS.POWER2
+          master_item:
+            key: Status
+        -
+          uuid: 8982007c81284719afcdf5f7ab7ecae4
+          name: Status_PowerOnState
+          type: DEPENDENT
+          key: Status_PowerOnState
+          delay: '0'
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.Status.PowerOnState
+          master_item:
+            key: Status
+        -
+          uuid: fd5542f487464732ae040d1e9d6c59e0
+          name: Status_PowerRetain
+          type: DEPENDENT
+          key: Status_PowerRetain
+          delay: '0'
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.Status.PowerRetain
+          master_item:
+            key: Status
+        -
+          uuid: 25bfc73842a54e6aac09f8e9360cf8d3
+          name: Status_SaveState
+          type: DEPENDENT
+          key: Status_SaveState
+          delay: '0'
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.Status.SaveState
+          master_item:
+            key: Status
+        -
+          uuid: 480ecf1b57e44aa2ac8e9330e3fc4d1c
+          name: Status_StateRetain
+          type: DEPENDENT
+          key: Status_StateRetain
+          delay: '0'
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.Status.StateRetain
+          master_item:
+            key: Status
+        -
+          uuid: 971ac0f00e8748349fbe0d8227954880
+          name: Status_Switch1
+          type: DEPENDENT
+          key: Status_Switch1
+          delay: '0'
+          trends: '0'
+          value_type: TEXT
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.StatusSNS.Switch1
+          master_item:
+            key: Status
+        -
+          uuid: 151459c73e6043c9860b5190cecc45f4
+          name: Status_Switch2
+          type: DEPENDENT
+          key: Status_Switch2
+          delay: '0'
+          trends: '0'
+          value_type: TEXT
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.StatusSNS.Switch2
+          master_item:
+            key: Status
+        -
+          uuid: f916449edfde4bcd8921d68a3e08935d
+          name: Status_SwitchMode
+          type: DEPENDENT
+          key: Status_SwitchMode
+          delay: '0'
+          trends: '0'
+          value_type: TEXT
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.Status.SwitchMode
+          master_item:
+            key: Status
+        -
+          uuid: 0006e780de0e438aa63cee81ef5f350f
+          name: Status_SwitchRetain
+          type: DEPENDENT
+          key: Status_SwitchRetain
+          delay: '0'
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.Status.SwitchRetain
+          master_item:
+            key: Status
+        -
+          uuid: a4160e3c371e4c9297638c815f63894f
+          name: Status_SwitchTopic
+          type: DEPENDENT
+          key: Status_SwitchTopic
+          delay: '0'
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.Status.SwitchTopic
+          master_item:
+            key: Status
+        -
+          uuid: c2bef2dbe8114dbeaaf6f49ac4622f85
+          name: Status_Temperature
+          type: DEPENDENT
+          key: Status_Temperature
+          delay: '0'
+          value_type: FLOAT
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.StatusSNS.ANALOG.Temperature
+          master_item:
+            key: Status
+        -
+          uuid: 0408f655f7bf4289b9a1a1847b1a41e0
+          name: Status_Topic
+          type: DEPENDENT
+          key: Status_Topic
+          delay: '0'
+          trends: '0'
+          value_type: TEXT
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.Status.Topic
+          master_item:
+            key: Status
+        -
+          uuid: db3d359a1907469e95bd142f6939d54c
+          name: Status_Wifi_Channel
+          type: DEPENDENT
+          key: Status_Wifi_Channel
+          delay: '0'
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.StatusSTS.Wifi.Channel
+          master_item:
+            key: Status
+        -
+          uuid: fe013597f7454c2c9bbfcf9b59669037
+          name: Status_Wifi_Mode
+          type: DEPENDENT
+          key: Status_Wifi_Mode
+          delay: '0'
+          trends: '0'
+          value_type: TEXT
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.StatusSTS.Wifi.Mode
+          master_item:
+            key: Status
+        -
+          uuid: 9e7646aa13844cc1a957a2b03c5745c8
+          name: Status_Wifi_RSSI
+          type: DEPENDENT
+          key: Status_Wifi_RSSI
+          delay: '0'
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.StatusSTS.Wifi.RSSI
+          master_item:
+            key: Status
+        -
+          uuid: e09fbe8444544b68abdc41da27c9b657
+          name: Status_Wifi_Signal
+          type: DEPENDENT
+          key: Status_Wifi_Signal
+          delay: '0'
+          value_type: FLOAT
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.StatusSTS.Wifi.Signal
+          master_item:
+            key: Status
+        -
+          uuid: 436e49e9ee24489fa9cf0663e44c7b5a
+          name: Status_Wifi_SSId
+          type: DEPENDENT
+          key: Status_Wifi_SSId
+          delay: '0'
+          trends: '0'
+          value_type: TEXT
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.StatusSTS.Wifi.SSId
+          master_item:
+            key: Status
